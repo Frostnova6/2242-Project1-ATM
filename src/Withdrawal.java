@@ -45,16 +45,18 @@ public class Withdrawal extends Transaction
          
          // obtain a chosen withdrawal amount from the user 
          amount = displayMenuOfAmounts();
-         
+         double withdrawAmount;
          // check whether user chose a withdrawal amount or canceled
          if ( amount != CANCELED )
          {
             // check whether the user has enough money in the account
              if (withdrawRMB == 2){
-                availableBalance = bankDatabase.isSufficientCashAvailable(getAccountNumber(), amount*1.15);
+                withdrawAmount = amount * 1.15;
              } else {
-                availableBalance = bankDatabase.isSufficientCashAvailable(getAccountNumber(), amount);
+                withdrawAmount = amount;
              }
+             availableBalance = bankDatabase.isSufficientCashAvailable(
+                     getAccountNumber(), withdrawAmount);
       
             if ( availableBalance )
             {   
@@ -62,7 +64,7 @@ public class Withdrawal extends Transaction
                if ( cashDispenser.isSufficientCashAvailable( amount ) )
                {
                   // update the account involved to reflect withdrawal
-                  bankDatabase.debit( getAccountNumber(), amount );
+                  bankDatabase.debit( getAccountNumber(), withdrawAmount );
                   
                   cashDispenser.dispenseCash( amount ); // dispense cash
                   cashDispensed = true; // cash was dispensed
