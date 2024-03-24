@@ -6,7 +6,7 @@ public class Transfer extends Transaction
    private double amount; // amount to transfer
    private Keypad keypad; // reference to keypad
    private final static int CANCELED = 0; // constant for cancel option
-   private int recipientAcountNumber;
+   private int recipientAccountNumber;
    private boolean isValidUser = false;
    private boolean isSufficientCashAvailable = false;
    // Transfer constructor
@@ -28,15 +28,15 @@ public class Transfer extends Transaction
       Screen screen = getScreen(); // get reference
       while(!(isValidUser)){
           // get recipient account number
-          recipientAcountNumber = promptForRecipientAccountNumber(); 
-          if (recipientAcountNumber == super.getAccountNumber()){
+          recipientAccountNumber = promptForRecipientAccountNumber(); 
+          if (recipientAccountNumber == super.getAccountNumber()){
               screen.displayMessageLine( "You cannot transfer money to your" 
               + " own account. Please enter again.");
               continue;
           }
-          isValidUser = bankDatabase.validateUser(recipientAcountNumber);
+          isValidUser = bankDatabase.validateUser(recipientAccountNumber);
           if (!(isValidUser))
-              screen.displayMessageLine( "Account " +  recipientAcountNumber 
+              screen.displayMessageLine( "Account " +  recipientAccountNumber 
                       + " does not exist. Please enter again." );
       }
       
@@ -48,7 +48,7 @@ public class Transfer extends Transaction
             // debit current account to reflect the transfer
             bankDatabase.debit( getAccountNumber(), amount ); 
             // credit recipient account to reflect the transfer
-            bankDatabase.credit( recipientAcountNumber , amount ); 
+            bankDatabase.credit( recipientAccountNumber , amount ); 
             screen.displayMessageLine( "Transaction completed." );
             screen.displayMessageLine( "Available balance: " 
                     + bankDatabase.getTotalBalance(getAccountNumber()) );
