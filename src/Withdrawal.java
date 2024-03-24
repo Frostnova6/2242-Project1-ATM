@@ -38,7 +38,7 @@ public class Withdrawal extends Transaction
       do
       {
          withdrawRMB = getCashType();
-         if ( withdrawRMB != CANCELED ){
+         if ( withdrawRMB == CANCELED ){
             screen.displayMessageLine( "\nCanceling transaction..." );
             return; // return to main menu because user canceled
          }
