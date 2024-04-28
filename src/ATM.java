@@ -9,6 +9,7 @@ public class ATM
    private Keypad keypad; // ATM's keypad
    private CashDispenser cashDispenser; // ATM's cash dispenser
    private BankDatabase bankDatabase; // account information database
+   private ATMGUI atmgui; // ATM's GUI
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
@@ -25,6 +26,7 @@ public class ATM
       keypad = new Keypad(); // create keypad 
       cashDispenser = new CashDispenser(); // create cash dispenser
       bankDatabase = new BankDatabase(); // create acct info database
+      atmgui = new ATMGUI(); // create the ATM's GUI
    } // end no-argument ATM constructor
 
    // start ATM 
